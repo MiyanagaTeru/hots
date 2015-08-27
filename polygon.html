@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+</head>
+<body>
+	<svg height="200" width="200"  id="c">
+	<polygon style="fill:lime;stroke:purple;stroke-width:1" ></polygon>
+</svg>
+</body>
+	<script>
+var svg = document.getElementsByTagName("svg")[0];
+//draw base line
+for (j=0; j<5; j++)
+{
+	var line = document.createElementNS("http://www.w3.org/2000/svg","line");
+	line.setAttribute("x1", "100");
+	line.setAttribute("y1", "100");
+	line.setAttribute("x2", 100-100*Math.sin(72*j/360*2*Math.PI));
+	line.setAttribute("y2", 100-100*Math.cos(72*j/360*2*Math.PI));
+	line.setAttribute("stroke","black");
+	line.setAttribute("stroke-width","1");
+	svg.appendChild(line);
+
+	var line2 = document.createElementNS("http://www.w3.org/2000/svg","line");
+	line2.setAttribute("x1", 100-100*Math.sin(72*j/360*2*Math.PI));
+	line2.setAttribute("y1", 100-100*Math.cos(72*j/360*2*Math.PI));
+	line2.setAttribute("x2", 100-100*Math.sin(72*(j+1)/360*2*Math.PI));
+	line2.setAttribute("y2", 100-100*Math.cos(72*(j+1)/360*2*Math.PI));
+	line2.setAttribute("stroke","black");
+	line2.setAttribute("stroke-width","1");
+	svg.appendChild(line2);			
+}
+
+
+var scores = [90,82,70,35,25];
+var pointsAttr = ""
+
+for (i=0; i<scores.length; i++)
+{
+    // console.log(scores[i]*Math.sin(72*i/360*2*Math.PI)+" , " + scores[i]*Math.cos(72*i/360*2*Math.PI) );
+	pointsAttr += " "+( 100-scores[i]*Math.sin(72*i/360*2*Math.PI))+","+ (100-scores[i]*Math.cos(72*i/360*2*Math.PI) );
+
+}
+// console.log(pointsAttr);
+svg.getElementsByTagName("polygon")[0].setAttribute("points", pointsAttr);
+	</script>
+</html>
+
